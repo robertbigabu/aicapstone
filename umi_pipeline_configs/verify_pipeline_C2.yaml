@@ -21,7 +21,7 @@
     slam_settings_file: "packages/umi/defaults/orb_slam3_settings/gopro13_fisheye_ratio_4-3_2-7k.yaml"
     resolution: [2028, 2704]
     mask_pts_json_path: "packages/umi/src/umi/asset/mask_4k.json"
-    enable_gui: true
+    enable_gui: false
     gui_lenient_exit: true
 
 04_detect_aruco:

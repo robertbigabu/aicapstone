@@ -1,0 +1,11 @@
+FROM chicheng/orb_slam3:latest
+
+# Fix: add bounds check to prevent segfault when mvIniP3D.size() < mvIniMatches.size()
+# in ORB_SLAM3::Tracking::CreateInitialMapMonocular
+RUN sed -i \
+    's/        worldPos << mvIniP3D\[i\]\.x, mvIniP3D\[i\]\.y, mvIniP3D\[i\]\.z;/        if (i >= mvIniP3D.size()) continue;\n        worldPos << mvIniP3D[i].x, mvIniP3D[i].y, mvIniP3D[i].z;/' \
+    /ORB_SLAM3/src/Tracking.cc && \
+    grep -n "mvIniP3D.size" /ORB_SLAM3/src/Tracking.cc
+
+# Rebuild only the changed file (Tracking.cc → libORB_SLAM3.so)
+RUN cd /ORB_SLAM3/build && make -j$(nproc) 2>&1 | tail -10

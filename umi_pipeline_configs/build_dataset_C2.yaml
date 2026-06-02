@@ -54,6 +54,7 @@
   inherit_config: true
   config:
     dataset_plan_filename: dataset_plan.pkl
+    ignore_cameras: "C3531325327561"
 
 07_frame_to_pose:
   instance: "umi.services.frame_to_pose.FrameToPoseService"
